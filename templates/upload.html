@@ -1,0 +1,211 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Simple Sundanese Translator</title>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet">
+	<style>
+		body{
+			/* background-image: url("https://advancedbiofuelssummit.com/wp-content/uploads/2019/11/megamendung-batik-pattern-4518352_1280.jpg"); */
+			background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/disp/a81f2122707335.563170fd41b5a.jpg");
+			background-size: 100%;
+		}
+		#outside{
+			padding: 30px 90px;
+		}
+
+		#inside{
+			/* text-align: center; */
+			position: relative;
+			width: 1250px;
+			height: 700px;
+			background-color: white;
+			z-index: 8;
+			box-shadow: 55px 45px 88px -62px rgba(0,0,0,0);
+		}
+
+		#header, .steps, #result, .masukkan, .algoritma, .mode{
+			font-family: 'Lato', sans-serif;
+			font-weight: 300;
+			text-align: center;
+			z-index: 0;
+		}
+
+		#header{
+			height: 100px;
+			/* margin: 0px;*/
+			padding-top:30px;
+			/* padding-left: 30px; */
+			text-align: center;
+			/* background-color: #607c3c; */
+			color: #28647E;
+			font-size: 20px;
+		}
+		#header h1{
+			margin-bottom: 10px;
+		}
+
+		#header h3{
+			display: inline;
+			margin: 20px 20px;
+			font-style: italic;
+		}
+
+		/* .steps{
+			text-align: center;
+			padding-top: 20px;
+			/* padding-bottom: 5px; */
+			/* color: black;
+			font-weight: 300px;
+		} */
+
+		.masukkan {
+			/* font-size: 14px; */
+			color: black;
+			font-size: 20px;
+			margin-top: 40px;
+		}
+
+		.masukkan .teks{
+			margin-top: 15px;
+			width: 600px;
+			height: 20px;
+			font-size: 14px;
+			padding: 5px 10px;
+			font-family: "Lato", sans-serif;
+			font-weight: 300;
+			color: #2C2C3F;
+			text-align: center;
+		}
+		
+		#result{
+			text-align: center;
+			padding: 20px 30px;
+			color: black;
+			font-size: 16px;
+		}
+
+		.algoritma{
+			margin-top: 15px;
+		}
+		.mode{
+			margin-top: -20px;
+		}
+
+		.algoritma select, .mode select{
+			margin: 10px;
+			position: relative;
+			font-family: "Lato", sans-serif;
+			font-weight: 300;
+			font-size: 40px;
+			width: 200px;
+			
+		}
+
+
+		#result p{
+			font-size: 24px;
+			margin: 10px 20px;
+		}
+
+		#result #jawab{
+			color: #A2BECC;
+		}
+		#result #query{
+			color: #6196AC;
+		}
+
+
+		#submit{
+			text-align: center;
+		}
+
+		#submit input{
+			height: 100px;
+			width: 200px;
+			font-size: 40px;
+		}
+
+		hr{
+			width: 1000px;
+			margin-top: 40px;
+			height: 2px;
+		}
+		
+		
+
+	</style>
+</head>
+
+<body>
+	<div id="outside">
+		<div id="inside">
+
+			<div id="header">
+				<h1>Simple Sundanese Translator</h1>
+				<h3 style="color: #6196AC;">Selamat Datang</h3>
+				<h3 style="color: #A2BECC;">Wilujeng Sumping</h3>
+			</div>
+			<hr>
+			<div class="translate">
+				<div class="form">
+					<form action = "/translate" method="POST">
+						<div class="masukkan">
+							<label for="kalimat">Masukkan kalimat yang ingin diterjemahkan!</label><br>
+							<input type="text" name="kalimat" class="teks" required><br><br>
+						</div>
+						<div class="steps algoritma">
+							<!-- <div id="rates"> -->
+								<!-- <h3>Pilih algoritma pencocokkan string mana yang ingin digunakan!</h3>
+								<div id="stringmatch">
+									<input type="radio" id="stringmatch" name="stringmatch" value="1" checked=checked>Boyer Moore 
+									<input type="radio" id="stringmatch" name="stringmatch" value="2"> Knuth Morris Pratt
+									<input type="radio" id="stringmatch" name="stringmatch" value="3"> Regular Expression
+								</div> -->
+								
+								<!-- </div> -->
+							<label for="stringmatch">Pilih algoritma pencocokkan string mana yang ingin digunakan!</label><br>
+							<select name="stringmatch" id="stringmatch" required>
+								<option value=""> -- Pilih algoritma -- </option>
+								<option value="1">Boyer Moore</option>
+								<option value="2">Knuth Morris Pratt</option>
+								<option value="3">Regular Expression</option>
+							</select>
+						</div>
+						<br><br>
+						<div class="steps mode">
+							<label for="mode">Pilih mode mana yang ingin digunakan!</label><br>
+							<select name="mode" id="mode" required>
+								<option value=""> -- Pilih mode -- </option>
+								<option value="1">Sunda - Indonesia</option>
+								<option value="2">Indonesia - Sunda</option>
+							</select>
+							
+						</div>
+						<br><br>
+						<div id="submit">
+							<input type="submit" value="Terjemahkan" required>
+						</div>
+						
+						
+						
+					</form>
+				</div>
+			</div>
+			
+			<div id='result'>
+				<!-- <h3>Hasil Terjemahan</h3> -->
+				<p id="query">{{kalimat}}</p>
+				{% for result in results %}
+				<p id="jawab">{{result}}</p>
+				{% endfor %}
+				<br>
+			</div>
+		</div>	
+
+	</div>
+	
+</body>
+
